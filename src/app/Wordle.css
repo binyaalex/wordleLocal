@@ -80,7 +80,7 @@ h4 {
   display: none;
   position: absolute;
   height: 100vh;
-  width: 100% ;
+  width: 505px ;
   top: 0;
   right: -5px;
   font-size: 14px;
@@ -406,14 +406,8 @@ button {
   }
 
   .helpPage, .definitionsPage {
-    display: none;
-    position: absolute;
-    height: 100vh;
     width: 97%;
-    top: 0;
     right: 9px;
-    font-size: 14px;
-    z-index: 2;
     padding: 0 5px;
   }
 }
