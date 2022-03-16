@@ -261,7 +261,7 @@ export const reducer = (state=initState, action={}) => {
 			        		messages.style.display = 'none'
 					  		yellowMsg.style.display = 'none'
 					  	}
-					  	setTimeout(undisplay, 800)
+					  	setTimeout(undisplay, 1500)
 				  		return {...state}
 				  	}
 			  	} else {
@@ -275,7 +275,7 @@ export const reducer = (state=initState, action={}) => {
 		        		messages.style.display = 'none'
 				  		greenMsg.style.display = 'none'
 				  	}
-				  	setTimeout(undisplay, 800)
+				  	setTimeout(undisplay, 1500)
 			  		return {...state}
 			  	}
 		  	} else {
@@ -289,7 +289,7 @@ export const reducer = (state=initState, action={}) => {
 	        		messages.style.display = 'none'
 			  		grayMsg.style.display = 'none'
 			  	}
-			  	setTimeout(undisplay, 800)
+			  	setTimeout(undisplay, 1500)
 		  		return {...state}
 		  	}
 		  	
@@ -304,7 +304,7 @@ export const reducer = (state=initState, action={}) => {
         		messages.style.display = 'none'
 		  		noWord.style.display = 'none'
 		  	}
-		  	setTimeout(undisplay, 800)
+		  	setTimeout(undisplay, 1500)
 		  	return {...state}
 		  }
 		  
