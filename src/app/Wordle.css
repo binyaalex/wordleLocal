@@ -73,13 +73,14 @@ h4 {
 
 .definitionsBtn{
   height: 24px;
+  padding: 0 7px;
 }
 
 .helpPage, .definitionsPage {
   display: none;
   position: absolute;
   height: 100vh;
-  width: 505px;
+  width: 100% ;
   top: 0;
   right: -5px;
   font-size: 14px;
@@ -396,11 +397,23 @@ button {
 
 @media all and (max-width: 500px) {
 
-  .all {
+  .wordleAll {
     width: 100%;
   }
 
   .qToP > *, .enterToDel > *, .aToL > * {
     width: 8vw;
+  }
+
+  .helpPage, .definitionsPage {
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 97%;
+    top: 0;
+    right: 9px;
+    font-size: 14px;
+    z-index: 2;
+    padding: 0 5px;
   }
 }
