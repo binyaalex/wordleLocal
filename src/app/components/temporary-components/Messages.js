@@ -5,7 +5,8 @@ const Messages = (props) => {
 	return (
 		<div className='messages'>
 			<div className='well'>{messages.win[turn-1]}</div>
-			<div className='loser'>{messages.loser} <strong>{dailyWord}</strong></div>
+			<div className='loser'>{messages.loser}<strong> {dailyWord}</strong></div>
+			<div className='shortWord'>{messages.shortWord}</div>
 			<div className='noWord'>{messages.noWord}</div>
 			<div className='grayMsg'>{messages.gray}</div>
 			<div className='greenMsg'>{messages.green}</div>

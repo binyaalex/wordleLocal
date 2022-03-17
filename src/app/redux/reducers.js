@@ -61,6 +61,7 @@ export const initState = {
 		messages: {
 			win: ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'],
 			loser: 'Game over, The word is:',
+			shortWord: 'Not enough letters',
 			noWord: 'Not in word list',
 			gray: `You can't use the gray letters!`,
 			green: 'You must use the green letters in there spot!',
@@ -214,76 +215,83 @@ export const reducer = (state=initState, action={}) => {
 		}
 
 		  // start check all the restrictions - word list, gray, green and yellow
-		  // check if there is such a word
-		  if (isWordInWordList) {
-		  	if (isGrayLetterInUserWord() || !state.hardMode) {
-		  		// check the user use all the green letters in there place
-			  	if (IsGreenLetterInUserWord || !state.hardMode) {
-			  		// check the user use all the yellow letters and not in the same place
-				  	if (IsYellowLetterInUserWord || !state.hardMode) {
-				  		let forDoubleLetters = {}
-				  		for (let i = 0; i < userWord.length; i++) {
-				  			forDoubleLetters[userWord[i]] = []
-				  			forDoubleLetters[userWord[i]].push(0)
-				  			// for check letar if its green in double letters
-				  			forDoubleLetters[userWord[i]].push(false)
-				  			// for check letar if its gray in double letters
-				  			forDoubleLetters[userWord[i]].push(false)
-				  			// check if the user letters are used in the daily word
-				  			// and if so color them in yellow
-				  			if (dailyWord.includes(userWord[i])) {
-				  				arr[state.writingDirection[i]] = state.colors.yellow
-				  				
-				  				// check if the user letters are in the right place
-				  				if (userWord[i] === dailyWord[i]) {
-						  			arr[state.writingDirection[i]] = state.colors.green
-				  				}
-				  			}				  					  	 					  	    
-					  	}
 
-					  	// new check for double letters
-				  		for (let i = userWord.length-1; i >= 0; i--) {
-				  			forDoubleLetters[userWord[i]][0]++
-				  			if (count(userWord, userWord[i]) > 1) {
-				  				if (count(dailyWord, userWord[i]) === count(userWord, userWord[i])) {
-				  				} else if (count(dailyWord, userWord[i]) === 1) {
-				  					if (arr[state.writingDirection[i]] !== state.colors.green) {
-				  						if (forDoubleLetters[userWord[i]][0] < count(userWord, userWord[i]) || forDoubleLetters[userWord[i]][1]) {
-				  							arr[state.writingDirection[i]] = state.colors.gray					  							
-				  						}
-				  					} else if (arr[state.writingDirection[i]] !== state.colors.gray) {
-				  						forDoubleLetters[userWord[i]][1] = true
-				  					}
-				  				} else if (count(dailyWord, userWord[i]) === 2) {
-				  					if (arr[state.writingDirection[i]] !== state.colors.green) {
-				  						if (!forDoubleLetters[userWord[i]][2]) {
-					  						arr[state.writingDirection[i]] = state.colors.gray				  							
-					  						forDoubleLetters[userWord[i]][2] = true			  							
-				  						}
-				  					}
-				  				}
-				  			}
+		  // check if the word is 5 letters
+	  	if (dailyWord === 5) {
+			  // check if there is such a word
+		  	if (isWordInWordList) {
+			  	if (isGrayLetterInUserWord() || !state.hardMode) {
+			  		// check the user use all the green letters in there place
+				  	if (IsGreenLetterInUserWord || !state.hardMode) {
+				  		// check the user use all the yellow letters and not in the same place
+					  	if (IsYellowLetterInUserWord || !state.hardMode) {
+					  		let forDoubleLetters = {}
+					  		for (let i = 0; i < userWord.length; i++) {
+					  			forDoubleLetters[userWord[i]] = []
+					  			forDoubleLetters[userWord[i]].push(0)
+					  			// for check letar if its green in double letters
+					  			forDoubleLetters[userWord[i]].push(false)
+					  			// for check letar if its gray in double letters
+					  			forDoubleLetters[userWord[i]].push(false)
+					  			// check if the user letters are used in the daily word
+					  			// and if so color them in yellow
+					  			if (dailyWord.includes(userWord[i])) {
+					  				arr[state.writingDirection[i]] = state.colors.yellow
+					  				
+					  				// check if the user letters are in the right place
+					  				if (userWord[i] === dailyWord[i]) {
+							  			arr[state.writingDirection[i]] = state.colors.green
+					  				}
+					  			}				  					  	 					  	    
+						  	}
+
+						  	// new check for double letters
+					  		for (let i = userWord.length-1; i >= 0; i--) {
+					  			forDoubleLetters[userWord[i]][0]++
+					  			if (count(userWord, userWord[i]) > 1) {
+					  				if (count(dailyWord, userWord[i]) === count(userWord, userWord[i])) {
+					  				} else if (count(dailyWord, userWord[i]) === 1) {
+					  					if (arr[state.writingDirection[i]] !== state.colors.green) {
+					  						if (forDoubleLetters[userWord[i]][0] < count(userWord, userWord[i]) || forDoubleLetters[userWord[i]][1]) {
+					  							arr[state.writingDirection[i]] = state.colors.gray					  							
+					  						}
+					  					} else if (arr[state.writingDirection[i]] !== state.colors.gray) {
+					  						forDoubleLetters[userWord[i]][1] = true
+					  					}
+					  				} else if (count(dailyWord, userWord[i]) === 2) {
+					  					if (arr[state.writingDirection[i]] !== state.colors.green) {
+					  						if (!forDoubleLetters[userWord[i]][2]) {
+						  						arr[state.writingDirection[i]] = state.colors.gray				  							
+						  						forDoubleLetters[userWord[i]][2] = true			  							
+					  						}
+					  					}
+					  				}
+					  			}
+						  	}
+					  	} else {
+					  		// put message that the user need to use the yellow letters
+							showMessage('.yellowMsg')
+					  		return {...state}
 					  	}
 				  	} else {
-				  		// put message that the user need to use the yellow letters
-						showMessage('.yellowMsg')
+					  	// put message that the user need to use the green letters
+						showMessage('.greenMsg')
 				  		return {...state}
 				  	}
 			  	} else {
-				  	// put message that the user need to use the green letters
-					showMessage('.greenMsg')
+			  		// put message that the user can't use the gray letters
+					showMessage('.grayMsg')
 			  		return {...state}
-			  	}
-		  	} else {
-		  		// put message that the user can't use the gray letters
-				showMessage('.grayMsg')
-		  		return {...state}
-		  	}	  	
-		  } else {
+			  	}	  	
+			} else {
 			// put message that there is no such a word
 			showMessage('.noWord')
-		  	return {...state}
-		  }
+			return {...state}
+			}
+		} else {
+			showMessage('.shortWord')
+			return {...state}
+		}
 		  
 		  return {...state, result: arr, turn: ++state.turn}
 
@@ -312,6 +320,7 @@ export const reducer = (state=initState, action={}) => {
 					messages: {
 						win: ['די נו תגלה לנו איך רימית', 'פשששששש על השני סחתיין', '!ניחוש שלישי יא תותח', '!מעולה', '!כל הכבוד', 'פיו זה היה קרוב'],
 						loser: 'אוי לא נורא, המילה היא:',
+						shortWord: 'אין מספיק אותיות',
 						noWord: 'המילה אינה ברשימת המילים',
 						gray: '!אתה לא יכול להשתמש באותיות  האפורות',
 						green: '!חייבים להשתמש באותיות  הירוקות במקום שלהן',
