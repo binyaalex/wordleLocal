@@ -217,7 +217,7 @@ export const reducer = (state=initState, action={}) => {
 		  // start check all the restrictions - word list, gray, green and yellow
 
 		  // check if the word is 5 letters
-	  	if (dailyWord === 5) {
+	  	if (userWord.length === 5) {
 			  // check if there is such a word
 		  	if (isWordInWordList) {
 			  	if (isGrayLetterInUserWord() || !state.hardMode) {
