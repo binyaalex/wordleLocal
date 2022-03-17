@@ -131,6 +131,7 @@ export const reducer = (state=initState, action={}) => {
 		  return {...state, userWord: userWord}
 
 		case 'ENTER':
+		console.log(state)
 		// make last letter good for hebrew in user word and daily word
 		userWord = userWord[state.turn]
 		let dailyWord = state.dailyWord
@@ -160,14 +161,14 @@ export const reducer = (state=initState, action={}) => {
 		const tries = document.querySelectorAll('.try')
 		const lastTry = tries[state.turn]
 		let IsGreenLetterInUserWord = true
-		let IsYellowLetterInUserWord = false
+		let numOfYellowLettersInOldsTries = 0
+		let IsYellowLetterInUserWord = 0
 		let noYellowLettersInUserTries = 1
 		const checkGreenAndYellowLetters = () => {
 			for (let c = 0; c < state.turn; c++) {
 				for (let b = 0; b < tries[c].children.length; b++) {
 					let letter
 					letter = finalToRegular(tries[c].children[state.writingDirection[b]].textContent)
-
 					// check the green letters
 					if (tries[c].children[state.writingDirection[b]].style.backgroundColor === state.colors.green) {
 						if (letter !== userWord[b]) {
@@ -177,12 +178,13 @@ export const reducer = (state=initState, action={}) => {
 
 					// check the yellow letters
 					if (tries[c].children[state.writingDirection[b]].style.backgroundColor === state.colors.yellow) {
+						numOfYellowLettersInOldsTries++
 						noYellowLettersInUserTries = false
 						for (let a = 0; a < userWord.length; a++) {
 							if (userWord[a] === letter && a !== b) {
-								IsYellowLetterInUserWord = true
+								IsYellowLetterInUserWord++
 							} else if (userWord[a] === letter && a === b) {
-								IsYellowLetterInUserWord = false
+								IsYellowLetterInUserWord = 0
 								return false
 							}
 						}
@@ -224,7 +226,7 @@ export const reducer = (state=initState, action={}) => {
 			  		// check the user use all the green letters in there place
 				  	if (IsGreenLetterInUserWord || !state.hardMode) {
 				  		// check the user use all the yellow letters and not in the same place
-					  	if (IsYellowLetterInUserWord || !state.hardMode) {
+					  	if (IsYellowLetterInUserWord >= numOfYellowLettersInOldsTries || !state.hardMode) {
 					  		let forDoubleLetters = {}
 					  		for (let i = 0; i < userWord.length; i++) {
 					  			forDoubleLetters[userWord[i]] = []
