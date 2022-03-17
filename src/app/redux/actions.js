@@ -116,11 +116,11 @@ export const changeAction = (e) => {
 			} else {
 		        messages.style.display = 'none'
 		        document.querySelector('.well').style.display = 'none'
-		        let loser = document.querySelector('.loser').style.display
-		        if (loser !== 'block') {
+		        let loser = document.querySelector('.loser')
+		        if (loser.style.display !== 'block') {
 		     		document.querySelector('.winner').classList.remove('winner')
 		        }
-		        document.querySelector('.loser').style.display = 'none'
+		        loser.style.display = 'none'
 		        playAgain.style.display = 'none'
 				if (language === 'עב') {
 					language = 'EN'
@@ -181,11 +181,11 @@ export const playAgainAction = () => {
 	let language = document.querySelector('.languageBtn').textContent
     document.querySelector('.messages').style.display = 'none'
     document.querySelector('.well').style.display = 'none'
-    let loser = document.querySelector('.loser').style.display
-    if (loser !== 'block') {
+    let loser = document.querySelector('.loser')
+    if (loser.style.display !== 'block') {
  		document.querySelector('.winner').classList.remove('winner')
     }
-    loser = 'none'		        
+    loser.style.display = 'none'		        
     document.querySelector('.playAgain').style.display = 'none'
 	if (language === 'עב') {
 		language = 'EN'
