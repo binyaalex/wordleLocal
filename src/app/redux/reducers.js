@@ -61,7 +61,7 @@ export const initState = {
 		messages: {
 			win: ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'],
 			loser: 'Game over, The word is:',
-			noWord: 'there is no such a word!',
+			noWord: 'Not in word list',
 			gray: `You can't use the gray letters!`,
 			green: 'You must use the green letters in there spot!',
 			yellow: 'You must use the yellow letters not in the same spot!',
@@ -267,16 +267,6 @@ export const reducer = (state=initState, action={}) => {
 				  	} else {
 				  		// put message that the user need to use the yellow letters
 						showMessage('.yellowMsg')
-						// const yellowMsg = document.querySelector('.yellowMsg')	
-				  // 		messages.style.display = 'block'
-					 //  	yellowMsg.style.display = 'block'
-					 //  	lastTry.classList.add('shake')
-					 //  	const undisplay = () => {
-					 //  		lastTry.classList.remove('shake')
-			   //      		messages.style.display = 'none'
-					 //  		yellowMsg.style.display = 'none'
-					 //  	}
-					 //  	setTimeout(undisplay, 1500)
 				  		return {...state}
 				  	}
 			  	} else {
