@@ -199,6 +199,20 @@ export const reducer = (state=initState, action={}) => {
 		let arr = [state.colors.gray, state.colors.gray, state.colors.gray, state.colors.gray, state.colors.gray]
 		let isWordInWordList = state.wordList.some(ele => ele === state.userWord[state.turn])
 		
+		const showMessage = (msgClass) => {
+			const msg = document.querySelector(msgClass)	
+	  		messages.style.display = 'block'
+		  	msg.style.display = 'block'
+		  	lastTry.classList.add('shake')
+		  	const undisplay = () => {
+		  		lastTry.classList.remove('shake')
+        		messages.style.display = 'none'
+		  		msg.style.display = 'none'
+		  	}
+		  	setTimeout(undisplay, 1500)
+	  		// return {...state}
+		}
+
 		  // start check all the restrictions - word list, gray, green and yellow
 		  // check if there is such a word
 		  if (isWordInWordList) {
@@ -252,59 +266,32 @@ export const reducer = (state=initState, action={}) => {
 					  	}
 				  	} else {
 				  		// put message that the user need to use the yellow letters
-						const yellowMsg = document.querySelector('.yellowMsg')	
-				  		messages.style.display = 'block'
-					  	yellowMsg.style.display = 'block'
-					  	lastTry.classList.add('shake')
-					  	const undisplay = () => {
-					  		lastTry.classList.remove('shake')
-			        		messages.style.display = 'none'
-					  		yellowMsg.style.display = 'none'
-					  	}
-					  	setTimeout(undisplay, 1500)
+						showMessage('.yellowMsg')
+						// const yellowMsg = document.querySelector('.yellowMsg')	
+				  // 		messages.style.display = 'block'
+					 //  	yellowMsg.style.display = 'block'
+					 //  	lastTry.classList.add('shake')
+					 //  	const undisplay = () => {
+					 //  		lastTry.classList.remove('shake')
+			   //      		messages.style.display = 'none'
+					 //  		yellowMsg.style.display = 'none'
+					 //  	}
+					 //  	setTimeout(undisplay, 1500)
 				  		return {...state}
 				  	}
 			  	} else {
 				  	// put message that the user need to use the green letters
-					const greenMsg = document.querySelector('.greenMsg')	
-			  		messages.style.display = 'block'
-				  	greenMsg.style.display = 'block'
-				  	lastTry.classList.add('shake')
-				  	const undisplay = () => {
-				  		lastTry.classList.remove('shake')
-		        		messages.style.display = 'none'
-				  		greenMsg.style.display = 'none'
-				  	}
-				  	setTimeout(undisplay, 1500)
+					showMessage('.greenMsg')
 			  		return {...state}
 			  	}
 		  	} else {
 		  		// put message that the user can't use the gray letters
-		  		messages.style.display = 'block'
-				const grayMsg = document.querySelector('.grayMsg')	
-			  	grayMsg.style.display = 'block'
-			  	lastTry.classList.add('shake')
-			  	const undisplay = () => {
-			  		lastTry.classList.remove('shake')
-	        		messages.style.display = 'none'
-			  		grayMsg.style.display = 'none'
-			  	}
-			  	setTimeout(undisplay, 1500)
+				showMessage('.grayMsg')
 		  		return {...state}
-		  	}
-		  	
+		  	}	  	
 		  } else {
 			// put message that there is no such a word
-			const noWord = document.querySelector('.noWord')	
-        	messages.style.display = 'block'
-		  	noWord.style.display = 'block'
-		  	lastTry.classList.add('shake')
-		  	const undisplay = () => {
-		  		lastTry.classList.remove('shake')
-        		messages.style.display = 'none'
-		  		noWord.style.display = 'none'
-		  	}
-		  	setTimeout(undisplay, 1500)
+			showMessage('.noWord')
 		  	return {...state}
 		  }
 		  
